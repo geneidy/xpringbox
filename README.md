@@ -20,3 +20,8 @@ pip install -r requirements.txt
 
 ## Usage
 
+alias pdex_start="cd $PDEX; mux stat ."
+alias pdex_stop="tmux kill-session -t pdex"
+
+        - workon xpringbox; ./start-trustline.py --host_ip "127.0.0.1" --host_port 10808 --remote_ip "127.0.0.1" --remote_port 10880
+        - sleep 5; workon xpringbox; ./start-trustline.py --host_ip "127.0.0.1" --host_port 10880 --remote_ip "127.0.0.1" --remote_port 10808
