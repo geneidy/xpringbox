@@ -11,20 +11,6 @@ import argparse
 from cmd2 import Cmd
 
 
-class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
-
-    def handle(self):
-        data = str(self.request.recv(1024), 'ascii')
-        cur_thread = threading.current_thread()
-        response = bytes("{}: {}".format(cur_thread.name, data), 'ascii')
-        print(response)
-        self.request.sendall(response)
-
-
-class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
-    pass
-
-
 class TrustLine(Cmd):
     """ Simple trustline demo """
 
@@ -74,10 +60,9 @@ class TrustLine(Cmd):
         self.server_start()
 
     def server_start(self):
-        self.server = ThreadedTCPServer((self._host_ip, self._host_port), 
-                                        ThreadedTCPRequestHandler)
+        self.server = self.ThreadedTCPServer((self._host_ip, self._host_port), 
+                                            self.ThreadedTCPRequestHandler)
         #print(self.server.server_address)
-
         server_thread = threading.Thread(target=self.server.serve_forever)
         server_thread.daemon = True
         server_thread.start()
@@ -108,6 +93,19 @@ class TrustLine(Cmd):
         self.server.server_close()
         return True
 
+    # Nested classes are not pythonic.
+    class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
+
+        def handle(self):
+            data = str(self.request.recv(1024), 'ascii')
+            cur_thread = threading.current_thread()
+            response = bytes("{}: {}".format(cur_thread.name, data), 'ascii')
+            print(response)
+            self.request.sendall(response)
+
+    class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+        pass
+
 
 def valid_ip(addr):
     try:
@@ -115,7 +113,6 @@ def valid_ip(addr):
         return True
     except:
         return False
-
 
 def valid_port(port):
     if(1024 <= int(port) <= 65535):
