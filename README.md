@@ -32,7 +32,6 @@ Ensure you're using the correct python interpreter.
 
 ```bash
 workon xpringbox
-which python3 # $HOME/.virtualenvs/xpringbox/bin/python3
 ```
 
 ### Terminal 1
@@ -44,5 +43,3 @@ which python3 # $HOME/.virtualenvs/xpringbox/bin/python3
 ```bash
 ./start-trustline.py --host_addr "127.0.0.1" --host_port 10888 --host_name "bob" remote_addr "127.0.0.1" --remote_port 10889
 ```
-
-## Demo

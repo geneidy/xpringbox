@@ -10,7 +10,6 @@ import argparse
 
 from cmd2 import Cmd
 
-
 BALANCE = 0
 
 class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
@@ -29,7 +28,7 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
 
 class TrustLine(Cmd):
-    """ Simple trustline demo """
+    """ Simple trustline. """
 
     def __init__(self, 
                 host_addr,
