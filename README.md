@@ -1,8 +1,10 @@
 # xpringbox
 
+Demonstration of trustlines. 
+
 This is inteded to demonstrate [trust lines](https://developers.ripple.com/trust-lines-and-issuing.html).
 
-## Installation
+## Prep
 
 ### Virtual Environment
 
@@ -10,8 +12,6 @@ For the purposes of this demonstration, we'll be using [virtualenvwrapper](https
 
 ```bash
 mkvirtualenv --python=python3 xpringbox
-workon xpringbox
-which python3 # $HOME/.virtualenvs/xpringbox/bin/python3
 ```
 
 ### Dependencies
@@ -21,11 +21,28 @@ Our only requirement beyond python's standard library is [cmd2](https://github.c
 ```bash
 pip install -r requirements.txt
 ```
+or simply
+```bash
+pip install cmd2
+```
 
 ## Usage
 
-alias pdex_start="cd $PDEX; mux stat ."
-alias pdex_stop="tmux kill-session -t pdex"
+Ensure you're using the correct python interpreter.
 
-        - workon xpringbox; ./start-trustline.py --host_ip "127.0.0.1" --host_port 10808 --remote_ip "127.0.0.1" --remote_port 10880
-        - sleep 5; workon xpringbox; ./start-trustline.py --host_ip "127.0.0.1" --host_port 10880 --remote_ip "127.0.0.1" --remote_port 10808
+```bash
+workon xpringbox
+which python3 # $HOME/.virtualenvs/xpringbox/bin/python3
+```
+
+### Terminal 1
+```bash
+./start-trustline.py --host_addr "127.0.0.1" --host_port 10889 --host_name "alice" --remote_addr "127.0.0.1" --remote_port 10888
+```
+
+### Terminal 2
+```bash
+./start-trustline.py --host_addr "127.0.0.1" --host_port 10888 --host_name "bob" remote_addr "127.0.0.1" --remote_port 10889
+```
+
+## Demo

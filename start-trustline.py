@@ -21,9 +21,6 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
         global BALANCE
         BALANCE += int(data)
         print('You were paid ' + data + '!')
-        #cur_thread = threading.current_thread()
-        #response = bytes("{}: {}".format(cur_thread.name, data), 'ascii')
-        #print(response)
         self.request.sendall(response)
 
 
@@ -78,21 +75,20 @@ class TrustLine(Cmd):
         self.server_start()
 
     def server_start(self):
+        # Start the TCP Server.
         self.server = ThreadedTCPServer((self._host_addr, self._host_port), 
                                         ThreadedTCPRequestHandler)
-        #print(self.server.server_address)
         server_thread = threading.Thread(target=self.server.serve_forever)
         server_thread.daemon = True
         server_thread.start()
 
     def client(self, ip_addr, port, message):
+        # Socket client.
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((ip_addr, port))
         try: 
             self.sock.sendall(bytes(message, 'ascii'))
             print('Sent')
-            #response = str(self.sock.recv(1024), 'ascii')
-            #print("Received: {}".format(response))
         finally:
             self.sock.close()
 
@@ -113,11 +109,9 @@ class TrustLine(Cmd):
         self.server.server_close()
         return True
 
-    # NOTE: Nested classes are not pythonic. Refactor out.
-
-
 
 def valid_ip_addr(addr):
+    # Validate supplied IP address.
     try:
         socket.inet_aton(addr)
         return True
@@ -125,6 +119,7 @@ def valid_ip_addr(addr):
         return False
 
 def valid_port(port):
+    # Validate supplied port. Exclude system port range.  
     if(1024 <= int(port) <= 65535):
         return True
     else:
