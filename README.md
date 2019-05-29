@@ -1,8 +1,10 @@
 # xpringbox
 
-This is inteded to demonstrate the use of [trust lines](https://developers.ripple.com/trust-lines-and-issuing.html).
+This is inteded to demonstrate [trust lines](https://developers.ripple.com/trust-lines-and-issuing.html).
 
 ## Installation
+
+### Virtual Environment
 
 For the purposes of this demonstration, we'll be using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/). 
 
@@ -12,7 +14,9 @@ workon xpringbox
 which python3 # $HOME/.virtualenvs/xpringbox/bin/python3
 ```
 
-Install dependencies. Our only requirement beyond python's standard library is [cmd2](https://github.com/python-cmd2/cmd2) for the command-line interpreter.
+### Dependencies
+
+Our only requirement beyond python's standard library is [cmd2](https://github.com/python-cmd2/cmd2) for the command-line interpreter.
 
 ```bash
 pip install -r requirements.txt
