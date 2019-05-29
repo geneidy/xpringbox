@@ -12,7 +12,7 @@ workon xpringbox
 which python3 # $HOME/.virtualenvs/xpringbox/bin/python3
 ```
 
-Install dependencies: our only requirement is [cmd2](https://github.com/python-cmd2/cmd2)
+Install dependencies. Our only requirement beyond python's standard library is [cmd2](https://github.com/python-cmd2/cmd2) for the command-line interpreter.
 
 ```bash
 pip install -r requirements.txt
