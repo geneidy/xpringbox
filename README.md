@@ -2,8 +2,6 @@
 
 Demonstration of trustlines. 
 
-This is inteded to demonstrate [trust lines](https://developers.ripple.com/trust-lines-and-issuing.html).
-
 ## Prep
 
 ### Virtual Environment
